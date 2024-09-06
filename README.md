@@ -108,7 +108,7 @@ Administrators have extended capabilities, including:
 Administrators can view and manage all tickets from all departments.
 
 2. Assigning Roles
-New users are initially assigned a "N/A" role, and administrators can modify their roles to allow them to solve tickets.
+New users are initially assigned a "No Role" role, and administrators can modify their roles to allow them to solve tickets.
 
 Demo:
 You can watch a demo of the application by following this link: https://www.youtube.com/watch?v=Ntw51lPifLI&ab_channel=ValentinRepciuc
