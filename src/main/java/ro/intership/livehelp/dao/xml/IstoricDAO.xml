@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.IstoricDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+<!-- select -->
+	<select id="getAllIstoric" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+	</select>
+	
+	<select id="getIstoricByParam" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+		    </if>	  
+		</where>		
+	</select>	
+
+	<select id="getIstoricByParamWithOrder" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+		    </if>		  
+		</where>
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+	<select id="getIstoricById" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+		where
+			id=#{id}
+	</select>
+
+	
+<!-- select from LOV -->
+	<select id="getIstoricByIdLov" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+		<if test="list != null">
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getIstoricById_tichetLov" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+		<if test="list != null">
+		where id_tichet in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getIstoricById_utilizatorLov" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+		<if test="list != null">
+		where id_utilizator in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getIstoricByStadiuLov" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+		<if test="list != null">
+		where stadiu in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getIstoricByDataLov" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+		<if test="list != null">
+		where data in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getIstoricByTextLov" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric
+		<if test="list != null">
+		where text in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+
+
+<!-- select from param, LOV, null, not null and order -->
+	<select id="getIstoricByIdLovNullWithOrder" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<!-- PARAM -->
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getIstoricById_tichetLovNullWithOrder" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<!-- PARAM -->
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id_tichet IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getIstoricById_utilizatorLovNullWithOrder" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<!-- PARAM -->
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id_utilizator IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getIstoricByStadiuLovNullWithOrder" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<!-- PARAM -->
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND stadiu IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getIstoricByDataLovNullWithOrder" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<!-- PARAM -->
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND data IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getIstoricByTextLovNullWithOrder" resultType="ro.intership.livehelp.model.Istoric">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	data,  
+		   	text 
+		from
+			istoric		
+		<where>
+			<!-- PARAM -->
+			<if test="istoricParam != null">
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND text IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+
+
+
+
+<!-- insert -->
+	<insert id="insertIstoric" parameterType="ro.intership.livehelp.model.Istoric" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		INSERT INTO istoric
+			(
+ 		        id_tichet, 
+ 		        id_utilizator, 
+ 		        stadiu, 
+ 		        data, 
+ 		        text 
+			)
+		VALUES
+			(
+ 		        #{id_tichet}, 
+ 		        #{id_utilizator}, 
+ 		        #{stadiu}, 
+ 		        #{data}, 
+ 		        #{text} 
+			)
+			
+		<!-- obtinere id din tabela. Se va actualiza proprietatea id a obiectului -->
+		<selectKey resultType="Integer" keyProperty="id" order="AFTER">
+                SELECT LAST_INSERT_ID();
+        </selectKey> 
+	</insert>
+	
+		
+<!-- update -->
+	<update id="updateIstoricByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update istoric set
+ 				id_tichet = #{istoric.id_tichet}, 
+ 				id_utilizator = #{istoric.id_utilizator}, 
+ 				stadiu = #{istoric.stadiu}, 
+ 				data = #{istoric.data}, 
+ 				text = #{istoric.text} 
+		<where>
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateIstoricExceptNullByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update istoric
+		<set>
+			<if test="istoric.id != null">			
+		   		id = #{istoric.id}, 
+		   	</if>
+			<if test="istoric.id_tichet != null">			
+		   		id_tichet = #{istoric.id_tichet}, 
+		   	</if>
+			<if test="istoric.id_utilizator != null">			
+		   		id_utilizator = #{istoric.id_utilizator}, 
+		   	</if>
+			<if test="istoric.stadiu != null">			
+		   		stadiu = #{istoric.stadiu}, 
+		   	</if>
+			<if test="istoric.data != null">			
+		   		data = #{istoric.data}, 
+		   	</if>
+			<if test="istoric.text != null">			
+		   		text = #{istoric.text}, 
+		   	</if>
+		</set>
+		<where>
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateIstoricById" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update istoric
+			<set>
+ 			<if test="istoric.id_tichet != null">			
+		   		id_tichet = #{istoric.id_tichet}, 
+		   	</if>
+ 			<if test="istoric.id_utilizator != null">			
+		   		id_utilizator = #{istoric.id_utilizator}, 
+		   	</if>
+ 			<if test="istoric.stadiu != null">			
+		   		stadiu = #{istoric.stadiu}, 
+		   	</if>
+ 			<if test="istoric.data != null">			
+		   		data = #{istoric.data}, 
+		   	</if>
+ 			<if test="istoric.text != null">			
+		   		text = #{istoric.text}, 
+		   	</if>
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+
+	<update id="updateIstoricByIdWithNull" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update istoric
+			<set>
+ 		   		id_tichet = #{istoric.id_tichet}, 
+ 		   		id_utilizator = #{istoric.id_utilizator}, 
+ 		   		stadiu = #{istoric.stadiu}, 
+ 		   		data = #{istoric.data}, 
+ 		   		text = #{istoric.text}, 
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+	
+<!-- delete -->
+	<delete id="deleteIstoricByParam">
+		delete from istoric
+		<where>
+		    <if test="istoricParam.id != null">
+		        AND id = #{istoricParam.id}
+		    </if>
+		    <if test="istoricParam.id_tichet != null">
+		        AND id_tichet = #{istoricParam.id_tichet}
+		    </if>
+		    <if test="istoricParam.id_utilizator != null">
+		        AND id_utilizator = #{istoricParam.id_utilizator}
+		    </if>
+		    <if test="istoricParam.stadiu != null">
+		        AND stadiu = #{istoricParam.stadiu}
+		    </if>
+		    <if test="istoricParam.data != null">
+		        AND data = #{istoricParam.data}
+		    </if>
+		    <if test="istoricParam.text != null">
+		        AND text = #{istoricParam.text}
+		    </if>
+		</where>	
+	</delete>
+
+	<delete id="deleteIstoricById">
+		delete from istoric
+		where
+			id = #{id}
+	</delete>
+
+</mapper>
+

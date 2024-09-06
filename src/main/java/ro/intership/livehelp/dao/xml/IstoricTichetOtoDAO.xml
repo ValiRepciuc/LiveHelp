@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.IstoricTichetOtoDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+			<select id="selectIstoric" resultMap="istoricResult">
+				SELECT
+					s.id as s_id,
+					s.id_tichet as s_id_tichet,
+					s.id_utilizator as s_id_utilizator,
+					s.stadiu as s_stadiu,
+					s.data as s_data,
+					s.text as s_text,
+			   		m.id as m_id,  
+			   		m.id_categorie as m_id_categorie 
+				FROM
+		    	 	istoric s,
+		    	 	tichet m		    	 	
+				WHERE
+		    	 	m.id = s.id_tichet
+		    	 	AND s.id = #{id}  
+			</select>
+
+
+			<resultMap id="istoricResult" type="ro.intership.livehelp.model.oto.IstoricTichetOto">
+				<!-- id is a must -->
+			  	<association property="istoric" javaType="ro.intership.livehelp.model.Istoric" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="data" column="s_data"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</association>
+				<association property="tichet" javaType="ro.intership.livehelp.model.Tichet" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="id_categorie" column="m_id_categorie"/>
+				</association>		
+			</resultMap>			
+
+
+
+<!-- ArrayList<SlaveMasterOto> -->
+
+			<select id="selectIstoricAsArray" resultMap="istoricResultArray">
+				SELECT
+					s.id as s_id,
+					s.id_tichet as s_id_tichet,
+					s.id_utilizator as s_id_utilizator,
+					s.stadiu as s_stadiu,
+					s.data as s_data,
+					s.text as s_text,
+			   		m.id as m_id,  
+			   		m.id_categorie as m_id_categorie 
+				FROM
+		    	 	istoric s
+		    	 	LEFT JOIN tichet m ON m.id = s.id_tichet
+				<where>   	 			    
+   	 			    <if test="istoricParam.id != null">
+				        AND s.id = #{istoricParam.id}
+				    </if>
+   	 			    <if test="istoricParam.id_tichet != null">
+				        AND s.id_tichet = #{istoricParam.id_tichet}
+				    </if>
+   	 			    <if test="istoricParam.id_utilizator != null">
+				        AND s.id_utilizator = #{istoricParam.id_utilizator}
+				    </if>
+   	 			    <if test="istoricParam.stadiu != null">
+				        AND s.stadiu = #{istoricParam.stadiu}
+				    </if>
+   	 			    <if test="istoricParam.data != null">
+				        AND s.data = #{istoricParam.data}
+				    </if>
+   	 			    <if test="istoricParam.text != null">
+				        AND s.text = #{istoricParam.text}
+				    </if>
+				</where>
+				<if test="order != null">
+  					order by ${order}
+  				</if>	
+			</select>
+
+			<resultMap id="istoricResultArray" type="ro.intership.livehelp.model.oto.IstoricTichetOto">
+			  	<association property="istoric" javaType="ro.intership.livehelp.model.Istoric" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="data" column="s_data"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</association>
+				<association property="tichet" javaType="ro.intership.livehelp.model.Tichet" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="id_categorie" column="m_id_categorie"/>
+				</association>		
+			</resultMap>			
+
+
+
+
+
+
+</mapper>
+

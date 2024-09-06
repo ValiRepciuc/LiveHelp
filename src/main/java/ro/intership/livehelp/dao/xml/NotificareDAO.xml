@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.NotificareDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+<!-- select -->
+	<select id="getAllNotificare" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare
+	</select>
+	
+	<select id="getNotificareByParam" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare		
+		<where>
+			<if test="notificareParam != null">
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+		    </if>	  
+		</where>		
+	</select>	
+
+	<select id="getNotificareByParamWithOrder" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare		
+		<where>
+			<if test="notificareParam != null">
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+		    </if>		  
+		</where>
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+	<select id="getNotificareById" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare
+		where
+			id=#{id}
+	</select>
+
+	
+<!-- select from LOV -->
+	<select id="getNotificareByIdLov" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare
+		<if test="list != null">
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getNotificareById_tichetLov" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare
+		<if test="list != null">
+		where id_tichet in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getNotificareById_utilizatorLov" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare
+		<if test="list != null">
+		where id_utilizator in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getNotificareByStadiuLov" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare
+		<if test="list != null">
+		where stadiu in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getNotificareByTextLov" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare
+		<if test="list != null">
+		where text in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+
+
+<!-- select from param, LOV, null, not null and order -->
+	<select id="getNotificareByIdLovNullWithOrder" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare		
+		<where>
+			<!-- PARAM -->
+			<if test="notificareParam != null">
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getNotificareById_tichetLovNullWithOrder" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare		
+		<where>
+			<!-- PARAM -->
+			<if test="notificareParam != null">
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id_tichet IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getNotificareById_utilizatorLovNullWithOrder" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare		
+		<where>
+			<!-- PARAM -->
+			<if test="notificareParam != null">
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id_utilizator IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getNotificareByStadiuLovNullWithOrder" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare		
+		<where>
+			<!-- PARAM -->
+			<if test="notificareParam != null">
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND stadiu IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getNotificareByTextLovNullWithOrder" resultType="ro.intership.livehelp.model.Notificare">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	id_utilizator,  
+		   	stadiu,  
+		   	text 
+		from
+			notificare		
+		<where>
+			<!-- PARAM -->
+			<if test="notificareParam != null">
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND text IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+
+
+
+
+<!-- insert -->
+	<insert id="insertNotificare" parameterType="ro.intership.livehelp.model.Notificare" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		INSERT INTO notificare
+			(
+ 		        id_tichet, 
+ 		        id_utilizator, 
+ 		        stadiu, 
+ 		        text 
+			)
+		VALUES
+			(
+ 		        #{id_tichet}, 
+ 		        #{id_utilizator}, 
+ 		        #{stadiu}, 
+ 		        #{text} 
+			)
+			
+		<!-- obtinere id din tabela. Se va actualiza proprietatea id a obiectului -->
+		<selectKey resultType="Integer" keyProperty="id" order="AFTER">
+                SELECT LAST_INSERT_ID();
+        </selectKey> 
+	</insert>
+	
+		
+<!-- update -->
+	<update id="updateNotificareByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update notificare set
+ 				id_tichet = #{notificare.id_tichet}, 
+ 				id_utilizator = #{notificare.id_utilizator}, 
+ 				stadiu = #{notificare.stadiu}, 
+ 				text = #{notificare.text} 
+		<where>
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateNotificareExceptNullByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update notificare
+		<set>
+			<if test="notificare.id != null">			
+		   		id = #{notificare.id}, 
+		   	</if>
+			<if test="notificare.id_tichet != null">			
+		   		id_tichet = #{notificare.id_tichet}, 
+		   	</if>
+			<if test="notificare.id_utilizator != null">			
+		   		id_utilizator = #{notificare.id_utilizator}, 
+		   	</if>
+			<if test="notificare.stadiu != null">			
+		   		stadiu = #{notificare.stadiu}, 
+		   	</if>
+			<if test="notificare.text != null">			
+		   		text = #{notificare.text}, 
+		   	</if>
+		</set>
+		<where>
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateNotificareById" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update notificare
+			<set>
+ 			<if test="notificare.id_tichet != null">			
+		   		id_tichet = #{notificare.id_tichet}, 
+		   	</if>
+ 			<if test="notificare.id_utilizator != null">			
+		   		id_utilizator = #{notificare.id_utilizator}, 
+		   	</if>
+ 			<if test="notificare.stadiu != null">			
+		   		stadiu = #{notificare.stadiu}, 
+		   	</if>
+ 			<if test="notificare.text != null">			
+		   		text = #{notificare.text}, 
+		   	</if>
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+
+	<update id="updateNotificareByIdWithNull" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update notificare
+			<set>
+ 		   		id_tichet = #{notificare.id_tichet}, 
+ 		   		id_utilizator = #{notificare.id_utilizator}, 
+ 		   		stadiu = #{notificare.stadiu}, 
+ 		   		text = #{notificare.text}, 
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+	
+<!-- delete -->
+	<delete id="deleteNotificareByParam">
+		delete from notificare
+		<where>
+		    <if test="notificareParam.id != null">
+		        AND id = #{notificareParam.id}
+		    </if>
+		    <if test="notificareParam.id_tichet != null">
+		        AND id_tichet = #{notificareParam.id_tichet}
+		    </if>
+		    <if test="notificareParam.id_utilizator != null">
+		        AND id_utilizator = #{notificareParam.id_utilizator}
+		    </if>
+		    <if test="notificareParam.stadiu != null">
+		        AND stadiu = #{notificareParam.stadiu}
+		    </if>
+		    <if test="notificareParam.text != null">
+		        AND text = #{notificareParam.text}
+		    </if>
+		</where>	
+	</delete>
+
+	<delete id="deleteNotificareById">
+		delete from notificare
+		where
+			id = #{id}
+	</delete>
+
+</mapper>
+

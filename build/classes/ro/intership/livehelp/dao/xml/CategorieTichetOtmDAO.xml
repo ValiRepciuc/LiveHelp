@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.CategorieTichetOtmDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+			<select id="selectCategorie" resultMap="categorieResult">
+				SELECT
+			   		m.id as m_id,
+			   		m.nume as m_nume,
+					s.id as s_id,  
+					s.id_categorie as s_id_categorie 
+				FROM
+		    	 	categorie m,
+		    	 	tichet s
+				WHERE
+		    	 	m.id = s.id_categorie
+		    	 	AND m.id = #{id}  
+			</select>
+
+
+			<resultMap id="categorieResult" type="ro.intership.livehelp.model.otm.CategorieTichetOtm">
+				<!-- id is a must -->
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="nume" column="m_nume"/>
+			  	<collection property="tichet" column="id" javaType="ArrayList" ofType="ro.intership.livehelp.model.Tichet">
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_categorie" column="s_id_categorie"/>
+ 			  	</collection>
+			</resultMap>			
+
+
+<!-- ArrayList<MasterSlaveOtm> -->
+
+			<select id="selectCategorieAsArray" resultMap="categorieResultArray">
+				SELECT
+			   		m.id as m_id,
+			   		m.nume as m_nume,
+					s.id as s_id,  
+					s.id_categorie as s_id_categorie 
+				FROM
+		    	 	categorie m
+		    	 	LEFT JOIN tichet s ON m.id = s.id_categorie
+				<where>   	 			    
+   	 			    <if test="categorieParam.id != null">
+				        AND m.id = #{categorieParam.id}
+				    </if>
+   	 			    <if test="categorieParam.nume != null">
+				        AND m.nume = #{categorieParam.nume}
+				    </if>
+				</where>
+				<if test="order != null">
+  					order by ${order}
+  				</if>	
+			</select>
+
+			<resultMap id="categorieResultArray" type="ro.intership.livehelp.model.otm.CategorieTichetOtm">
+				<!-- id is a must -->
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="nume" column="m_nume"/>
+			  	<collection property="tichet" column="id" javaType="ArrayList" ofType="ro.intership.livehelp.model.Tichet">
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_categorie" column="s_id_categorie"/>
+ 			  	</collection>
+			</resultMap>
+
+</mapper>
+

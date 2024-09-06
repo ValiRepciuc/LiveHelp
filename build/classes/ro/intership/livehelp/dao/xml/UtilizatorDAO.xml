@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.UtilizatorDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+<!-- select -->
+	<select id="getAllUtilizator" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+	</select>
+	
+	<select id="getUtilizatorByParam" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+		    </if>	  
+		</where>		
+	</select>	
+
+	<select id="getUtilizatorByParamWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+		    </if>		  
+		</where>
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+	<select id="getUtilizatorById" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		where
+			id=#{id}
+	</select>
+
+	
+<!-- select from LOV -->
+	<select id="getUtilizatorByIdLov" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		<if test="list != null">
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getUtilizatorByUsernameLov" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		<if test="list != null">
+		where username in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getUtilizatorByParolaLov" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		<if test="list != null">
+		where parola in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getUtilizatorByEmailLov" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		<if test="list != null">
+		where email in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getUtilizatorByNumeLov" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		<if test="list != null">
+		where nume in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getUtilizatorByPrenumeLov" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		<if test="list != null">
+		where prenume in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getUtilizatorByTelefonLov" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator
+		<if test="list != null">
+		where telefon in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+
+
+<!-- select from param, LOV, null, not null and order -->
+	<select id="getUtilizatorByIdLovNullWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<!-- PARAM -->
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getUtilizatorByUsernameLovNullWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<!-- PARAM -->
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND username IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getUtilizatorByParolaLovNullWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<!-- PARAM -->
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND parola IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getUtilizatorByEmailLovNullWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<!-- PARAM -->
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND email IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getUtilizatorByNumeLovNullWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<!-- PARAM -->
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND nume IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getUtilizatorByPrenumeLovNullWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<!-- PARAM -->
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND prenume IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getUtilizatorByTelefonLovNullWithOrder" resultType="ro.intership.livehelp.model.Utilizator">
+		select
+		   	id,  
+		   	username,  
+		   	parola,  
+		   	email,  
+		   	nume,  
+		   	prenume,  
+		   	telefon 
+		from
+			utilizator		
+		<where>
+			<!-- PARAM -->
+			<if test="utilizatorParam != null">
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND telefon IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+
+
+
+
+<!-- insert -->
+	<insert id="insertUtilizator" parameterType="ro.intership.livehelp.model.Utilizator" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		INSERT INTO utilizator
+			(
+ 		        username, 
+ 		        parola, 
+ 		        email, 
+ 		        nume, 
+ 		        prenume, 
+ 		        telefon 
+			)
+		VALUES
+			(
+ 		        #{username}, 
+ 		        #{parola}, 
+ 		        #{email}, 
+ 		        #{nume}, 
+ 		        #{prenume}, 
+ 		        #{telefon} 
+			)
+			
+		<!-- obtinere id din tabela. Se va actualiza proprietatea id a obiectului -->
+		<selectKey resultType="Integer" keyProperty="id" order="AFTER">
+                SELECT LAST_INSERT_ID();
+        </selectKey> 
+	</insert>
+	
+		
+<!-- update -->
+	<update id="updateUtilizatorByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update utilizator set
+ 				username = #{utilizator.username}, 
+ 				parola = #{utilizator.parola}, 
+ 				email = #{utilizator.email}, 
+ 				nume = #{utilizator.nume}, 
+ 				prenume = #{utilizator.prenume}, 
+ 				telefon = #{utilizator.telefon} 
+		<where>
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateUtilizatorExceptNullByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update utilizator
+		<set>
+			<if test="utilizator.id != null">			
+		   		id = #{utilizator.id}, 
+		   	</if>
+			<if test="utilizator.username != null">			
+		   		username = #{utilizator.username}, 
+		   	</if>
+			<if test="utilizator.parola != null">			
+		   		parola = #{utilizator.parola}, 
+		   	</if>
+			<if test="utilizator.email != null">			
+		   		email = #{utilizator.email}, 
+		   	</if>
+			<if test="utilizator.nume != null">			
+		   		nume = #{utilizator.nume}, 
+		   	</if>
+			<if test="utilizator.prenume != null">			
+		   		prenume = #{utilizator.prenume}, 
+		   	</if>
+			<if test="utilizator.telefon != null">			
+		   		telefon = #{utilizator.telefon}, 
+		   	</if>
+		</set>
+		<where>
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateUtilizatorById" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update utilizator
+			<set>
+ 			<if test="utilizator.username != null">			
+		   		username = #{utilizator.username}, 
+		   	</if>
+ 			<if test="utilizator.parola != null">			
+		   		parola = #{utilizator.parola}, 
+		   	</if>
+ 			<if test="utilizator.email != null">			
+		   		email = #{utilizator.email}, 
+		   	</if>
+ 			<if test="utilizator.nume != null">			
+		   		nume = #{utilizator.nume}, 
+		   	</if>
+ 			<if test="utilizator.prenume != null">			
+		   		prenume = #{utilizator.prenume}, 
+		   	</if>
+ 			<if test="utilizator.telefon != null">			
+		   		telefon = #{utilizator.telefon}, 
+		   	</if>
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+
+	<update id="updateUtilizatorByIdWithNull" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update utilizator
+			<set>
+ 		   		username = #{utilizator.username}, 
+ 		   		parola = #{utilizator.parola}, 
+ 		   		email = #{utilizator.email}, 
+ 		   		nume = #{utilizator.nume}, 
+ 		   		prenume = #{utilizator.prenume}, 
+ 		   		telefon = #{utilizator.telefon}, 
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+	
+<!-- delete -->
+	<delete id="deleteUtilizatorByParam">
+		delete from utilizator
+		<where>
+		    <if test="utilizatorParam.id != null">
+		        AND id = #{utilizatorParam.id}
+		    </if>
+		    <if test="utilizatorParam.username != null">
+		        AND username = #{utilizatorParam.username}
+		    </if>
+		    <if test="utilizatorParam.parola != null">
+		        AND parola = #{utilizatorParam.parola}
+		    </if>
+		    <if test="utilizatorParam.email != null">
+		        AND email = #{utilizatorParam.email}
+		    </if>
+		    <if test="utilizatorParam.nume != null">
+		        AND nume = #{utilizatorParam.nume}
+		    </if>
+		    <if test="utilizatorParam.prenume != null">
+		        AND prenume = #{utilizatorParam.prenume}
+		    </if>
+		    <if test="utilizatorParam.telefon != null">
+		        AND telefon = #{utilizatorParam.telefon}
+		    </if>
+		</where>	
+	</delete>
+
+	<delete id="deleteUtilizatorById">
+		delete from utilizator
+		where
+			id = #{id}
+	</delete>
+
+</mapper>
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.TichetCategorieOtoDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+			<select id="selectTichet" resultMap="tichetResult">
+				SELECT
+					s.id as s_id,
+					s.id_categorie as s_id_categorie,
+			   		m.id as m_id,  
+			   		m.nume as m_nume 
+				FROM
+		    	 	tichet s,
+		    	 	categorie m		    	 	
+				WHERE
+		    	 	m.id = s.id_categorie
+		    	 	AND s.id = #{id}  
+			</select>
+
+
+			<resultMap id="tichetResult" type="ro.intership.livehelp.model.oto.TichetCategorieOto">
+				<!-- id is a must -->
+			  	<association property="tichet" javaType="ro.intership.livehelp.model.Tichet" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_categorie" column="s_id_categorie"/>
+ 			  	</association>
+				<association property="categorie" javaType="ro.intership.livehelp.model.Categorie" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="nume" column="m_nume"/>
+				</association>		
+			</resultMap>			
+
+
+
+<!-- ArrayList<SlaveMasterOto> -->
+
+			<select id="selectTichetAsArray" resultMap="tichetResultArray">
+				SELECT
+					s.id as s_id,
+					s.id_categorie as s_id_categorie,
+			   		m.id as m_id,  
+			   		m.nume as m_nume 
+				FROM
+		    	 	tichet s
+		    	 	LEFT JOIN categorie m ON m.id = s.id_categorie
+				<where>   	 			    
+   	 			    <if test="tichetParam.id != null">
+				        AND s.id = #{tichetParam.id}
+				    </if>
+   	 			    <if test="tichetParam.id_categorie != null">
+				        AND s.id_categorie = #{tichetParam.id_categorie}
+				    </if>
+				</where>
+				<if test="order != null">
+  					order by ${order}
+  				</if>	
+			</select>
+
+			<resultMap id="tichetResultArray" type="ro.intership.livehelp.model.oto.TichetCategorieOto">
+			  	<association property="tichet" javaType="ro.intership.livehelp.model.Tichet" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_categorie" column="s_id_categorie"/>
+ 			  	</association>
+				<association property="categorie" javaType="ro.intership.livehelp.model.Categorie" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="nume" column="m_nume"/>
+				</association>		
+			</resultMap>			
+
+
+
+
+
+
+</mapper>
+

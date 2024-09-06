@@ -1,0 +1,47 @@
+.btn-save {
+  background-color: rgba(251, 174, 60, 1); /* Background color orange */
+  border-radius: 4px;
+  padding: 6px 12px;
+  border: 1px solid #fbae3c;
+  color: #ffffff; /* Text color white */
+  background: linear-gradient(
+    0deg,
+    rgba(251, 174, 60, 1) 4%,
+    rgba(251, 174, 60, 1) 47%,
+    rgba(251, 174, 60, 1) 100%
+  );
+}
+
+.btn-save:hover {
+  background: linear-gradient(
+    0deg,
+    rgba(249, 198, 121, 1) 4%,
+    rgba(251, 174, 60, 1) 47%,
+    rgba(251, 174, 60, 1) 100%
+  ); /* Background color gradient orange */
+  color: #ffffff; /* Text color white */
+}
+.btn-save:active {
+  opacity: 0.8;
+}
+
+.btn-cancel {
+  background-color: gray;
+  border-radius: 4px;
+  padding: 6px 12px;
+  border: 1px solid gray;
+  color: #ffffff;
+}
+
+.btn-cancel:hover {
+  background-color: white;
+  color: gray;
+}
+.btn-cancel:active {
+  opacity: 0.8;
+}
+@media (max-width: 767px) {
+  .hide {
+    display: none;
+  }
+}

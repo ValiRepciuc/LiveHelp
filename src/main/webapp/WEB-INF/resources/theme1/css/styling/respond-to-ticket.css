@@ -1,0 +1,37 @@
+.btn-close-ticket {
+  border-color: #fbae3c;
+  color: #fbae3c;
+  background-color: inherit;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.btn-close-ticket:hover {
+  border-color: #c88b30;
+  color: #c88b30;
+  opacity: 0.9;
+}
+.btn-close-ticket:active {
+  border-color: #c88b30;
+  color: #c88b30;
+  opacity: 0.85;
+  background-color: inherit;
+}
+.btn-add {
+  border-color: #fbae3c;
+  color: white;
+  background-color: #fbae3c;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.btn-add:hover {
+  border-color: none;
+  color: white;
+  background-color: none;
+  opacity: 0.9;
+}
+.btn-add:active {
+  border-color: #c88b30;
+  color: white;
+  opacity: 0.85;
+  background-color: #c88b30;
+}

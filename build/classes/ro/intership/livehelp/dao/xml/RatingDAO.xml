@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.RatingDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+<!-- select -->
+	<select id="getAllRating" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating
+	</select>
+	
+	<select id="getRatingByParam" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating		
+		<where>
+			<if test="ratingParam != null">
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+		    </if>	  
+		</where>		
+	</select>	
+
+	<select id="getRatingByParamWithOrder" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating		
+		<where>
+			<if test="ratingParam != null">
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+		    </if>		  
+		</where>
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+	<select id="getRatingById" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating
+		where
+			id=#{id}
+	</select>
+
+	
+<!-- select from LOV -->
+	<select id="getRatingByIdLov" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating
+		<if test="list != null">
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getRatingById_tichetLov" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating
+		<if test="list != null">
+		where id_tichet in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getRatingByValoareLov" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating
+		<if test="list != null">
+		where valoare in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+
+
+<!-- select from param, LOV, null, not null and order -->
+	<select id="getRatingByIdLovNullWithOrder" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating		
+		<where>
+			<!-- PARAM -->
+			<if test="ratingParam != null">
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getRatingById_tichetLovNullWithOrder" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating		
+		<where>
+			<!-- PARAM -->
+			<if test="ratingParam != null">
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id_tichet IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getRatingByValoareLovNullWithOrder" resultType="ro.intership.livehelp.model.Rating">
+		select
+		   	id,  
+		   	id_tichet,  
+		   	valoare 
+		from
+			rating		
+		<where>
+			<!-- PARAM -->
+			<if test="ratingParam != null">
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND valoare IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+
+
+
+
+<!-- insert -->
+	<insert id="insertRating" parameterType="ro.intership.livehelp.model.Rating" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		INSERT INTO rating
+			(
+ 		        id_tichet, 
+ 		        valoare 
+			)
+		VALUES
+			(
+ 		        #{id_tichet}, 
+ 		        #{valoare} 
+			)
+			
+		<!-- obtinere id din tabela. Se va actualiza proprietatea id a obiectului -->
+		<selectKey resultType="Integer" keyProperty="id" order="AFTER">
+                SELECT LAST_INSERT_ID();
+        </selectKey> 
+	</insert>
+	
+		
+<!-- update -->
+	<update id="updateRatingByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update rating set
+ 				id_tichet = #{rating.id_tichet}, 
+ 				valoare = #{rating.valoare} 
+		<where>
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateRatingExceptNullByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update rating
+		<set>
+			<if test="rating.id != null">			
+		   		id = #{rating.id}, 
+		   	</if>
+			<if test="rating.id_tichet != null">			
+		   		id_tichet = #{rating.id_tichet}, 
+		   	</if>
+			<if test="rating.valoare != null">			
+		   		valoare = #{rating.valoare}, 
+		   	</if>
+		</set>
+		<where>
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateRatingById" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update rating
+			<set>
+ 			<if test="rating.id_tichet != null">			
+		   		id_tichet = #{rating.id_tichet}, 
+		   	</if>
+ 			<if test="rating.valoare != null">			
+		   		valoare = #{rating.valoare}, 
+		   	</if>
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+
+	<update id="updateRatingByIdWithNull" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update rating
+			<set>
+ 		   		id_tichet = #{rating.id_tichet}, 
+ 		   		valoare = #{rating.valoare}, 
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+	
+<!-- delete -->
+	<delete id="deleteRatingByParam">
+		delete from rating
+		<where>
+		    <if test="ratingParam.id != null">
+		        AND id = #{ratingParam.id}
+		    </if>
+		    <if test="ratingParam.id_tichet != null">
+		        AND id_tichet = #{ratingParam.id_tichet}
+		    </if>
+		    <if test="ratingParam.valoare != null">
+		        AND valoare = #{ratingParam.valoare}
+		    </if>
+		</where>	
+	</delete>
+
+	<delete id="deleteRatingById">
+		delete from rating
+		where
+			id = #{id}
+	</delete>
+
+</mapper>
+

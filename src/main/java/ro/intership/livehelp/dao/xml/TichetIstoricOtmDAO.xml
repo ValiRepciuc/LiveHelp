@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.TichetIstoricOtmDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+			<select id="selectTichet" resultMap="tichetResult">
+				SELECT
+			   		m.id as m_id,
+			   		m.id_categorie as m_id_categorie,
+					s.id as s_id,  
+					s.id_tichet as s_id_tichet,  
+					s.id_utilizator as s_id_utilizator,  
+					s.stadiu as s_stadiu,  
+					s.data as s_data,  
+					s.text as s_text 
+				FROM
+		    	 	tichet m,
+		    	 	istoric s
+				WHERE
+		    	 	m.id = s.id_tichet
+		    	 	AND m.id = #{id}  
+			</select>
+
+
+			<resultMap id="tichetResult" type="ro.intership.livehelp.model.otm.TichetIstoricOtm">
+				<!-- id is a must -->
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="id_categorie" column="m_id_categorie"/>
+			  	<collection property="istoric" column="id" javaType="ArrayList" ofType="ro.intership.livehelp.model.Istoric">
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="data" column="s_data"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</collection>
+			</resultMap>			
+
+
+<!-- ArrayList<MasterSlaveOtm> -->
+
+			<select id="selectTichetAsArray" resultMap="tichetResultArray">
+				SELECT
+			   		m.id as m_id,
+			   		m.id_categorie as m_id_categorie,
+					s.id as s_id,  
+					s.id_tichet as s_id_tichet,  
+					s.id_utilizator as s_id_utilizator,  
+					s.stadiu as s_stadiu,  
+					s.data as s_data,  
+					s.text as s_text 
+				FROM
+		    	 	tichet m
+		    	 	LEFT JOIN istoric s ON m.id = s.id_tichet
+				<where>   	 			    
+   	 			    <if test="tichetParam.id != null">
+				        AND m.id = #{tichetParam.id}
+				    </if>
+   	 			    <if test="tichetParam.id_categorie != null">
+				        AND m.id_categorie = #{tichetParam.id_categorie}
+				    </if>
+				</where>
+				<if test="order != null">
+  					order by ${order}
+  				</if>	
+			</select>
+
+			<resultMap id="tichetResultArray" type="ro.intership.livehelp.model.otm.TichetIstoricOtm">
+				<!-- id is a must -->
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="id_categorie" column="m_id_categorie"/>
+			  	<collection property="istoric" column="id" javaType="ArrayList" ofType="ro.intership.livehelp.model.Istoric">
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="data" column="s_data"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</collection>
+			</resultMap>
+
+</mapper>
+

@@ -1,0 +1,149 @@
+
+<html>
+<head>
+
+ <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"> 
+
+<!-- jQuery -->
+<script src="js/jquery-3.2.1.min.js" ></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" >
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/bootstrap.min.js" ></script>
+</head>
+<title>URL Factory</title>
+
+
+<body>
+<br>
+<br>
+<center>
+<div class="elements">
+	<input type="text" name="nume" value =""><br>
+	<input type="text" name="email" value=""><br>
+	<textarea name="comentariu" rows="5" cols="30"></textarea><br>
+	<select name="sex">
+		<option value=""></option>
+		<option value="masculin">masculin</option>
+		<option value="feminin">feminin</option>	
+	</select><br>
+	<select name="masini" multiple>
+		<option value=""></option>
+		<option value="Renault">Renault</option>
+		<option value="Peugeot">Peugeot</option>
+		<option value="Dacia">Dacia</option>		
+	</select><br>
+	<input type="button" name="salveaza" value="Salveaza"><br>
+	<input type="hidden" name="id" value="kajskwoejaksnw13nwdnsa">
+
+</div>
+<br>
+<br><input name="outside" value="myoutside">
+</center>
+
+</body>
+
+<script>
+
+	$(document).ready(function(){
+		
+		
+		
+		$(':button').click(function(){	
+			myEncodeURL(this);
+			myEncodeURL(this, 'emailx', 'gixygix@gmail.com');
+		});
+
+		//todo: "select multiple" trebuie tratat separat
+		function myEncodeURL(cklic){
+		
+				var ret = '';
+				var init = true;
+				
+				// find class name of button
+				var clsName = $(cklic).parent().attr('class');
+		
+					// ====== for input, textarea, select =====
+				subElements = $('.'+clsName).find('input, textarea, select');
+				for(var i=0; i<subElements.length; i++) {
+					var elem = subElements[i];
+					if(init){
+							ret += '?';
+							init=false;
+					}
+					else{
+						ret += '&';
+					}
+					//ret += $(elem).attr('name') + '=' + encodeURIComponent($(elem).val());
+					ret += $(elem).attr('name') + '=' + $(elem).val();					
+				}
+				console.log(ret);
+				return ret;		
+		};
+		
+		// cu suprascriere un parametru
+		function myEncodeURL(cklic, nume, valoare){
+		
+				var ret = '';
+				var init = true;
+				var found = false;
+				
+				// find class name of button
+				var clsName = $(cklic).parent().attr('class');
+		
+					// ====== for input, textarea, select =====
+				subElements = $('.'+clsName).find('input, textarea, select');
+				for(var i=0; i<subElements.length; i++) {
+					var elem = subElements[i];
+					if(init){
+							ret += '?';
+							init=false;
+					}
+					else{
+						ret += '&';
+					}
+					if($(elem).attr('name')==nume){
+						ret += $(elem).attr('name') + '=' + encodeURIComponent(valoare);
+						found = true;
+					}
+					else
+						ret += $(elem).attr('name') + '=' + encodeURIComponent($(elem).val());		
+				}
+				
+				// adaugare parametru in caz ca nu exista
+				if(!found){
+					if(init){
+						ret += '?';
+					}
+					else{
+						ret += '&';
+					}
+					ret+=nume+"="+valoare;					
+				}
+				
+				
+				
+				console.log(ret);
+				return ret;		
+		};
+		
+	});
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+

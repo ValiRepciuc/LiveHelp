@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.TichetDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+<!-- select -->
+	<select id="getAllTichet" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet
+	</select>
+	
+	<select id="getTichetByParam" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet		
+		<where>
+			<if test="tichetParam != null">
+		    <if test="tichetParam.id != null">
+		        AND id = #{tichetParam.id}
+		    </if>
+		    <if test="tichetParam.id_categorie != null">
+		        AND id_categorie = #{tichetParam.id_categorie}
+		    </if>
+		    </if>	  
+		</where>		
+	</select>	
+
+	<select id="getTichetByParamWithOrder" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet		
+		<where>
+			<if test="tichetParam != null">
+		    <if test="tichetParam.id != null">
+		        AND id = #{tichetParam.id}
+		    </if>
+		    <if test="tichetParam.id_categorie != null">
+		        AND id_categorie = #{tichetParam.id_categorie}
+		    </if>
+		    </if>		  
+		</where>
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+	<select id="getTichetById" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet
+		where
+			id=#{id}
+	</select>
+
+	
+<!-- select from LOV -->
+	<select id="getTichetByIdLov" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet
+		<if test="list != null">
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getTichetById_categorieLov" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet
+		<if test="list != null">
+		where id_categorie in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+
+
+<!-- select from param, LOV, null, not null and order -->
+	<select id="getTichetByIdLovNullWithOrder" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet		
+		<where>
+			<!-- PARAM -->
+			<if test="tichetParam != null">
+		    <if test="tichetParam.id != null">
+		        AND id = #{tichetParam.id}
+		    </if>
+		    <if test="tichetParam.id_categorie != null">
+		        AND id_categorie = #{tichetParam.id_categorie}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getTichetById_categorieLovNullWithOrder" resultType="ro.intership.livehelp.model.Tichet">
+		select
+		   	id,  
+		   	id_categorie 
+		from
+			tichet		
+		<where>
+			<!-- PARAM -->
+			<if test="tichetParam != null">
+		    <if test="tichetParam.id != null">
+		        AND id = #{tichetParam.id}
+		    </if>
+		    <if test="tichetParam.id_categorie != null">
+		        AND id_categorie = #{tichetParam.id_categorie}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id_categorie IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+
+
+
+
+<!-- insert -->
+	<insert id="insertTichet" parameterType="ro.intership.livehelp.model.Tichet" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		INSERT INTO tichet
+			(
+ 		        id_categorie 
+			)
+		VALUES
+			(
+ 		        #{id_categorie} 
+			)
+			
+		<!-- obtinere id din tabela. Se va actualiza proprietatea id a obiectului -->
+		<selectKey resultType="Integer" keyProperty="id" order="AFTER">
+                SELECT LAST_INSERT_ID();
+        </selectKey> 
+	</insert>
+	
+		
+<!-- update -->
+	<update id="updateTichetByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update tichet set
+ 				id_categorie = #{tichet.id_categorie} 
+		<where>
+		    <if test="tichetParam.id != null">
+		        AND id = #{tichetParam.id}
+		    </if>
+		    <if test="tichetParam.id_categorie != null">
+		        AND id_categorie = #{tichetParam.id_categorie}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateTichetExceptNullByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update tichet
+		<set>
+			<if test="tichet.id != null">			
+		   		id = #{tichet.id}, 
+		   	</if>
+			<if test="tichet.id_categorie != null">			
+		   		id_categorie = #{tichet.id_categorie}, 
+		   	</if>
+		</set>
+		<where>
+		    <if test="tichetParam.id != null">
+		        AND id = #{tichetParam.id}
+		    </if>
+		    <if test="tichetParam.id_categorie != null">
+		        AND id_categorie = #{tichetParam.id_categorie}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateTichetById" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update tichet
+			<set>
+ 			<if test="tichet.id_categorie != null">			
+		   		id_categorie = #{tichet.id_categorie}, 
+		   	</if>
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+
+	<update id="updateTichetByIdWithNull" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update tichet
+			<set>
+ 		   		id_categorie = #{tichet.id_categorie}, 
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+	
+<!-- delete -->
+	<delete id="deleteTichetByParam">
+		delete from tichet
+		<where>
+		    <if test="tichetParam.id != null">
+		        AND id = #{tichetParam.id}
+		    </if>
+		    <if test="tichetParam.id_categorie != null">
+		        AND id_categorie = #{tichetParam.id_categorie}
+		    </if>
+		</where>	
+	</delete>
+
+	<delete id="deleteTichetById">
+		delete from tichet
+		where
+			id = #{id}
+	</delete>
+
+</mapper>
+

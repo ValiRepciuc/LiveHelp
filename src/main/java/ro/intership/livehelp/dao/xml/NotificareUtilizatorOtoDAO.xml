@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.NotificareUtilizatorOtoDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+			<select id="selectNotificare" resultMap="notificareResult">
+				SELECT
+					s.id as s_id,
+					s.id_tichet as s_id_tichet,
+					s.id_utilizator as s_id_utilizator,
+					s.stadiu as s_stadiu,
+					s.text as s_text,
+			   		m.id as m_id,  
+			   		m.username as m_username,  
+			   		m.parola as m_parola,  
+			   		m.email as m_email,  
+			   		m.nume as m_nume,  
+			   		m.prenume as m_prenume,  
+			   		m.telefon as m_telefon 
+				FROM
+		    	 	notificare s,
+		    	 	utilizator m		    	 	
+				WHERE
+		    	 	m.id = s.id_utilizator
+		    	 	AND s.id = #{id}  
+			</select>
+
+
+			<resultMap id="notificareResult" type="ro.intership.livehelp.model.oto.NotificareUtilizatorOto">
+				<!-- id is a must -->
+			  	<association property="notificare" javaType="ro.intership.livehelp.model.Notificare" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</association>
+				<association property="utilizator" javaType="ro.intership.livehelp.model.Utilizator" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="username" column="m_username"/>
+			   		<result property="parola" column="m_parola"/>
+			   		<result property="email" column="m_email"/>
+			   		<result property="nume" column="m_nume"/>
+			   		<result property="prenume" column="m_prenume"/>
+			   		<result property="telefon" column="m_telefon"/>
+				</association>		
+			</resultMap>			
+
+
+
+<!-- ArrayList<SlaveMasterOto> -->
+
+			<select id="selectNotificareAsArray" resultMap="notificareResultArray">
+				SELECT
+					s.id as s_id,
+					s.id_tichet as s_id_tichet,
+					s.id_utilizator as s_id_utilizator,
+					s.stadiu as s_stadiu,
+					s.text as s_text,
+			   		m.id as m_id,  
+			   		m.username as m_username,  
+			   		m.parola as m_parola,  
+			   		m.email as m_email,  
+			   		m.nume as m_nume,  
+			   		m.prenume as m_prenume,  
+			   		m.telefon as m_telefon 
+				FROM
+		    	 	notificare s
+		    	 	LEFT JOIN utilizator m ON m.id = s.id_utilizator
+				<where>   	 			    
+   	 			    <if test="notificareParam.id != null">
+				        AND s.id = #{notificareParam.id}
+				    </if>
+   	 			    <if test="notificareParam.id_tichet != null">
+				        AND s.id_tichet = #{notificareParam.id_tichet}
+				    </if>
+   	 			    <if test="notificareParam.id_utilizator != null">
+				        AND s.id_utilizator = #{notificareParam.id_utilizator}
+				    </if>
+   	 			    <if test="notificareParam.stadiu != null">
+				        AND s.stadiu = #{notificareParam.stadiu}
+				    </if>
+   	 			    <if test="notificareParam.text != null">
+				        AND s.text = #{notificareParam.text}
+				    </if>
+				</where>
+				<if test="order != null">
+  					order by ${order}
+  				</if>	
+			</select>
+
+			<resultMap id="notificareResultArray" type="ro.intership.livehelp.model.oto.NotificareUtilizatorOto">
+			  	<association property="notificare" javaType="ro.intership.livehelp.model.Notificare" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</association>
+				<association property="utilizator" javaType="ro.intership.livehelp.model.Utilizator" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="username" column="m_username"/>
+			   		<result property="parola" column="m_parola"/>
+			   		<result property="email" column="m_email"/>
+			   		<result property="nume" column="m_nume"/>
+			   		<result property="prenume" column="m_prenume"/>
+			   		<result property="telefon" column="m_telefon"/>
+				</association>		
+			</resultMap>			
+
+
+
+
+
+
+</mapper>
+

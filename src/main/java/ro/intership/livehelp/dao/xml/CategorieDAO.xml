@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.CategorieDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+<!-- select -->
+	<select id="getAllCategorie" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie
+	</select>
+	
+	<select id="getCategorieByParam" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie		
+		<where>
+			<if test="categorieParam != null">
+		    <if test="categorieParam.id != null">
+		        AND id = #{categorieParam.id}
+		    </if>
+		    <if test="categorieParam.nume != null">
+		        AND nume = #{categorieParam.nume}
+		    </if>
+		    </if>	  
+		</where>		
+	</select>	
+
+	<select id="getCategorieByParamWithOrder" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie		
+		<where>
+			<if test="categorieParam != null">
+		    <if test="categorieParam.id != null">
+		        AND id = #{categorieParam.id}
+		    </if>
+		    <if test="categorieParam.nume != null">
+		        AND nume = #{categorieParam.nume}
+		    </if>
+		    </if>		  
+		</where>
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+	<select id="getCategorieById" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie
+		where
+			id=#{id}
+	</select>
+
+	
+<!-- select from LOV -->
+	<select id="getCategorieByIdLov" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie
+		<if test="list != null">
+		where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+	<select id="getCategorieByNumeLov" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie
+		<if test="list != null">
+		where nume in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        		#{item}
+  		</foreach>
+  		</if>
+  		<if test="order != null">
+  			order by ${order}
+  		</if>
+	</select>
+	
+	
+
+
+<!-- select from param, LOV, null, not null and order -->
+	<select id="getCategorieByIdLovNullWithOrder" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie		
+		<where>
+			<!-- PARAM -->
+			<if test="categorieParam != null">
+		    <if test="categorieParam.id != null">
+		        AND id = #{categorieParam.id}
+		    </if>
+		    <if test="categorieParam.nume != null">
+		        AND nume = #{categorieParam.nume}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND id IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+	<select id="getCategorieByNumeLovNullWithOrder" resultType="ro.intership.livehelp.model.Categorie">
+		select
+		   	id,  
+		   	nume 
+		from
+			categorie		
+		<where>
+			<!-- PARAM -->
+			<if test="categorieParam != null">
+		    <if test="categorieParam.id != null">
+		        AND id = #{categorieParam.id}
+		    </if>
+		    <if test="categorieParam.nume != null">
+		        AND nume = #{categorieParam.nume}
+		    </if>
+			</if>	    
+		    
+		    <!-- LOV -->
+		    <if test="list != null">
+				AND nume IN
+				<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		        		#{item}
+		  		</foreach>
+		  	</if>
+
+				    		        
+		    <!-- LISTA DE CAMPURI NULL -->		    
+		    <if test="nullList != null">
+				<foreach item="item" index="index" collection="nullList">
+		        		AND ${item} IS NULL
+		  		</foreach>
+	  		</if>
+	  		  		
+	  		<!-- LISTA DE CAMPURI NOT NULL -->		    
+		    <if test="notNullList != null">
+				<foreach item="item" index="index" collection="notNullList">
+		        		AND ${item} IS NOT NULL
+		  		</foreach>
+	  		</if>	  				    
+		</where>
+		
+		<if test="order != null">
+  			order by ${order}
+  		</if>		
+	</select>	
+
+
+
+
+
+
+<!-- insert -->
+	<insert id="insertCategorie" parameterType="ro.intership.livehelp.model.Categorie" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		INSERT INTO categorie
+			(
+ 		        nume 
+			)
+		VALUES
+			(
+ 		        #{nume} 
+			)
+			
+		<!-- obtinere id din tabela. Se va actualiza proprietatea id a obiectului -->
+		<selectKey resultType="Integer" keyProperty="id" order="AFTER">
+                SELECT LAST_INSERT_ID();
+        </selectKey> 
+	</insert>
+	
+		
+<!-- update -->
+	<update id="updateCategorieByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update categorie set
+ 				nume = #{categorie.nume} 
+		<where>
+		    <if test="categorieParam.id != null">
+		        AND id = #{categorieParam.id}
+		    </if>
+		    <if test="categorieParam.nume != null">
+		        AND nume = #{categorieParam.nume}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateCategorieExceptNullByParam"  > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update categorie
+		<set>
+			<if test="categorie.id != null">			
+		   		id = #{categorie.id}, 
+		   	</if>
+			<if test="categorie.nume != null">			
+		   		nume = #{categorie.nume}, 
+		   	</if>
+		</set>
+		<where>
+		    <if test="categorieParam.id != null">
+		        AND id = #{categorieParam.id}
+		    </if>
+		    <if test="categorieParam.nume != null">
+		        AND nume = #{categorieParam.nume}
+		    </if>
+		</where>
+	</update>
+
+
+	<update id="updateCategorieById" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update categorie
+			<set>
+ 			<if test="categorie.nume != null">			
+		   		nume = #{categorie.nume}, 
+		   	</if>
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+
+	<update id="updateCategorieByIdWithNull" > 	<!-- useGeneratedKeys="true" keyProperty="id" keyColumn="id" -->
+		update categorie
+			<set>
+ 		   		nume = #{categorie.nume}, 
+			</set>
+		where
+				id = #{id}  
+
+	</update>
+
+	
+<!-- delete -->
+	<delete id="deleteCategorieByParam">
+		delete from categorie
+		<where>
+		    <if test="categorieParam.id != null">
+		        AND id = #{categorieParam.id}
+		    </if>
+		    <if test="categorieParam.nume != null">
+		        AND nume = #{categorieParam.nume}
+		    </if>
+		</where>	
+	</delete>
+
+	<delete id="deleteCategorieById">
+		delete from categorie
+		where
+			id = #{id}
+	</delete>
+
+</mapper>
+

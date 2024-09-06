@@ -1,0 +1,66 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-image: url("../Photos/test1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.full-height {
+  height: 100%;
+}
+.bg-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.a-custom {
+  text-decoration: none;
+}
+.color-custom {
+  color: #fbae3c;
+}
+.color-custom:active {
+  opacity: 0.7;
+}
+:root {
+  --custom-btn-bg: #fbae3c;
+  --custom-btn-border: #fbae3c;
+  --custom-btn-hover-bg: #c88b30;
+  --custom-btn-hover-border: #c88b30;
+  --custom-btn-active-bg: #c88b30;
+  --custom-btn-active-border: #c88b30;
+}
+
+.bg-color-custom {
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--custom-btn-bg);
+  --bs-btn-border-color: var(--custom-btn-border);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: var(--custom-btn-hover-bg);
+  --bs-btn-hover-border-color: var(--custom-btn-hover-border);
+  --bs-btn-focus-shadow-rgb: var(--custom-btn-hover-bg);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: var(--custom-btn-active-bg);
+  --bs-btn-active-border-color: var(--custom-btn-active-border);
+}
+
+.btn-opacity:active {
+  opacity: 0.7;
+}
+.custom-label {
+  box-shadow: none;
+}
+.custom-label:checked {
+  background-color: #fbae3c;
+  border-color: #fbae3c;
+  box-shadow: none;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+}

@@ -1,0 +1,128 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+ 	
+ <!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->	
+ 	
+ 
+	<context:component-scan base-package="ro.intership.livehelp"></context:component-scan>
+	<context:annotation-config /> 
+	<!-- must for rest controllers -->
+	<mvc:annotation-driven />
+	<!-- must for static content (pic, css, js) -->
+	<mvc:resources mapping="/static/**" location="/WEB-INF/resources/theme1/" />
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+ 	</bean>
+ 	
+ 
+ 	<!-- fileupload / blob fields -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <property name="maxUploadSize">
+	        <value>10000000</value>
+	    </property>
+	</bean>
+  
+  	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+
+<!-- DATABASE -->
+	<bean id="dataSourceDatabase" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	   	<property name="driverClassName" value="org.gjt.mm.mysql.Driver" />    	
+    	<property name="url" value="jdbc:mysql://127.0.0.1/livehelp?useSSL=false" />
+    	<property name="username" value="root" />
+    	<property name="password" value="p0able2hl" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	    <property name="basePackage" value="ro.intership.livehelp.dao"/>
+	    <property name="sqlSessionFactoryBeanName" value="database_SqlSessionFactory"/>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" name="database_SqlSessionFactory">
+	    <property name="dataSource" ref="dataSourceDatabase" />
+	   	<property name="mapperLocations" value="classpath:ro/intership/livehelp/dao/xml/*.xml" />
+	    <property name="configLocation" value="classpath:ro/intership/livehelp/config/mybatis-config.xml"/>
+	</bean>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSourceDatabase"/>
+	</bean>
+ 
+ 
+ 
+ 
+ 	<!-- ============= MyBATIS Mapers as INTERFACES for DAO @Autowired  ================  --> 
+ 	<!-- ================one by one. Else use daoScanner instead 
+ 	<bean id="myDomeniu" class="org.mybatis.spring.mapper.MapperFactoryBean">
+  			<property name="mapperInterface" value="ro.intership.livehelp.dao.DomeniuDAO" />
+  			<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="myUtilizator" class="org.mybatis.spring.mapper.MapperFactoryBean">
+  			<property name="mapperInterface" value="ro.intership.livehelp.dao.UtilizatorDAO" />
+  			<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	 -->
+	
+	
+	<!-- ============= DOZER Mapper=====================  -->
+	<bean id="dozerBeanMapper" class="org.dozer.DozerBeanMapper">
+        <property name="mappingFiles">
+            <list>
+            	<!-- default configuration -->
+                <value>classpath:ro/intership/livehelp/model/dozer/default.xml</value>
+                <!-- mappers -->
+                <value>classpath:ro/intership/livehelp/model/dozer/mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+	<!-- ============= beans for @Autowired =====================  
+	<bean id="conversii" class="ro.intership.livehelp.service.Conversii" />
+	<bean id="domeniuservice" class="ro.intership.livehelp.service.DomeniuService" />
+	<bean id="utilizatorservice" class="ro.intership.livehelp.service.UtilizatorService" />
+	-->
+	
+<!-- 	
+	
+	<bean id="frontController" class="ro.tsm.app.controller.FrontController" />
+	
+
+	<bean id="level0"        class="ro.intership.livehelp.meniu.model.Level0" />
+	<bean id="level0DAO"     class="ro.intership.livehelp.meniu.dao.impl.Level0DAOImpl" />
+	<bean id="level0Service" class="ro.intership.livehelp.meniu.service.impl.Level0ServiceImpl" />
+
+
+	<bean id="level1"        class="ro.intership.livehelp.meniu.model.Level1" />
+	<bean id="level1DAO"     class="ro.intership.livehelp.meniu.dao.impl.Level1DAOImpl" />
+	<bean id="level1Service" class="ro.intership.livehelp.meniu.service.impl.Level1ServiceImpl" />
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+ -->
+
+<!--	
+	for oracle
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:stefan/stefan@localhost:1521:softway" />			
+	</bean>
+
+	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    		<property name="url" value="jdbc:mysql://localhost:3306/mymenu?useSSL=false" />
+    		<property name="username" value="root" />
+    		<property name="password" value="fstefanf" />
+    </bean>
+-->	
+ 	
+</beans>

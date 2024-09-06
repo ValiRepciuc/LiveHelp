@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/create-ticket.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/history.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/profile.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/respond-ticket.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/solved-tickets.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/terms-and-conditions.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/tickets-to-solve.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/total-tickets.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/unsolved-tickets.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/users.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/your-tickets.jsp=UTF-8
+encoding/<project>=windows-1250

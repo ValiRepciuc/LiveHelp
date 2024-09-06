@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.RolUtilizatorOtoDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+			<select id="selectRol" resultMap="rolResult">
+				SELECT
+					s.id as s_id,
+					s.id_utilizator as s_id_utilizator,
+					s.nume as s_nume,
+			   		m.id as m_id,  
+			   		m.username as m_username,  
+			   		m.parola as m_parola,  
+			   		m.email as m_email,  
+			   		m.nume as m_nume,  
+			   		m.prenume as m_prenume,  
+			   		m.telefon as m_telefon 
+				FROM
+		    	 	rol s,
+		    	 	utilizator m		    	 	
+				WHERE
+		    	 	m.id = s.id_utilizator
+		    	 	AND s.id = #{id}  
+			</select>
+
+
+			<resultMap id="rolResult" type="ro.intership.livehelp.model.oto.RolUtilizatorOto">
+				<!-- id is a must -->
+			  	<association property="rol" javaType="ro.intership.livehelp.model.Rol" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="nume" column="s_nume"/>
+ 			  	</association>
+				<association property="utilizator" javaType="ro.intership.livehelp.model.Utilizator" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="username" column="m_username"/>
+			   		<result property="parola" column="m_parola"/>
+			   		<result property="email" column="m_email"/>
+			   		<result property="nume" column="m_nume"/>
+			   		<result property="prenume" column="m_prenume"/>
+			   		<result property="telefon" column="m_telefon"/>
+				</association>		
+			</resultMap>			
+
+
+
+<!-- ArrayList<SlaveMasterOto> -->
+
+			<select id="selectRolAsArray" resultMap="rolResultArray">
+				SELECT
+					s.id as s_id,
+					s.id_utilizator as s_id_utilizator,
+					s.nume as s_nume,
+			   		m.id as m_id,  
+			   		m.username as m_username,  
+			   		m.parola as m_parola,  
+			   		m.email as m_email,  
+			   		m.nume as m_nume,  
+			   		m.prenume as m_prenume,  
+			   		m.telefon as m_telefon 
+				FROM
+		    	 	rol s
+		    	 	LEFT JOIN utilizator m ON m.id = s.id_utilizator
+				<where>   	 			    
+   	 			    <if test="rolParam.id != null">
+				        AND s.id = #{rolParam.id}
+				    </if>
+   	 			    <if test="rolParam.id_utilizator != null">
+				        AND s.id_utilizator = #{rolParam.id_utilizator}
+				    </if>
+   	 			    <if test="rolParam.nume != null">
+				        AND s.nume = #{rolParam.nume}
+				    </if>
+				</where>
+				<if test="order != null">
+  					order by ${order}
+  				</if>	
+			</select>
+
+			<resultMap id="rolResultArray" type="ro.intership.livehelp.model.oto.RolUtilizatorOto">
+			  	<association property="rol" javaType="ro.intership.livehelp.model.Rol" column="id" >
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="nume" column="s_nume"/>
+ 			  	</association>
+				<association property="utilizator" javaType="ro.intership.livehelp.model.Utilizator" column="id" >
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="username" column="m_username"/>
+			   		<result property="parola" column="m_parola"/>
+			   		<result property="email" column="m_email"/>
+			   		<result property="nume" column="m_nume"/>
+			   		<result property="prenume" column="m_prenume"/>
+			   		<result property="telefon" column="m_telefon"/>
+				</association>		
+			</resultMap>			
+
+
+
+
+
+
+</mapper>
+

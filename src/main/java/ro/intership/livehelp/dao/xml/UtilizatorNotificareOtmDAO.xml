@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ro.intership.livehelp.dao.UtilizatorNotificareOtmDAO">
+
+<!-- MACHIME GENERATED. REMOVE THIS LINE IF YOU MODIFY THIS FILE -->
+
+			<select id="selectUtilizator" resultMap="utilizatorResult">
+				SELECT
+			   		m.id as m_id,
+			   		m.username as m_username,
+			   		m.parola as m_parola,
+			   		m.email as m_email,
+			   		m.nume as m_nume,
+			   		m.prenume as m_prenume,
+			   		m.telefon as m_telefon,
+					s.id as s_id,  
+					s.id_tichet as s_id_tichet,  
+					s.id_utilizator as s_id_utilizator,  
+					s.stadiu as s_stadiu,  
+					s.text as s_text 
+				FROM
+		    	 	utilizator m,
+		    	 	notificare s
+				WHERE
+		    	 	m.id = s.id_utilizator
+		    	 	AND m.id = #{id}  
+			</select>
+
+
+			<resultMap id="utilizatorResult" type="ro.intership.livehelp.model.otm.UtilizatorNotificareOtm">
+				<!-- id is a must -->
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="username" column="m_username"/>
+			   		<result property="parola" column="m_parola"/>
+			   		<result property="email" column="m_email"/>
+			   		<result property="nume" column="m_nume"/>
+			   		<result property="prenume" column="m_prenume"/>
+			   		<result property="telefon" column="m_telefon"/>
+			  	<collection property="notificare" column="id" javaType="ArrayList" ofType="ro.intership.livehelp.model.Notificare">
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</collection>
+			</resultMap>			
+
+
+<!-- ArrayList<MasterSlaveOtm> -->
+
+			<select id="selectUtilizatorAsArray" resultMap="utilizatorResultArray">
+				SELECT
+			   		m.id as m_id,
+			   		m.username as m_username,
+			   		m.parola as m_parola,
+			   		m.email as m_email,
+			   		m.nume as m_nume,
+			   		m.prenume as m_prenume,
+			   		m.telefon as m_telefon,
+					s.id as s_id,  
+					s.id_tichet as s_id_tichet,  
+					s.id_utilizator as s_id_utilizator,  
+					s.stadiu as s_stadiu,  
+					s.text as s_text 
+				FROM
+		    	 	utilizator m
+		    	 	LEFT JOIN notificare s ON m.id = s.id_utilizator
+				<where>   	 			    
+   	 			    <if test="utilizatorParam.id != null">
+				        AND m.id = #{utilizatorParam.id}
+				    </if>
+   	 			    <if test="utilizatorParam.username != null">
+				        AND m.username = #{utilizatorParam.username}
+				    </if>
+   	 			    <if test="utilizatorParam.parola != null">
+				        AND m.parola = #{utilizatorParam.parola}
+				    </if>
+   	 			    <if test="utilizatorParam.email != null">
+				        AND m.email = #{utilizatorParam.email}
+				    </if>
+   	 			    <if test="utilizatorParam.nume != null">
+				        AND m.nume = #{utilizatorParam.nume}
+				    </if>
+   	 			    <if test="utilizatorParam.prenume != null">
+				        AND m.prenume = #{utilizatorParam.prenume}
+				    </if>
+   	 			    <if test="utilizatorParam.telefon != null">
+				        AND m.telefon = #{utilizatorParam.telefon}
+				    </if>
+				</where>
+				<if test="order != null">
+  					order by ${order}
+  				</if>	
+			</select>
+
+			<resultMap id="utilizatorResultArray" type="ro.intership.livehelp.model.otm.UtilizatorNotificareOtm">
+				<!-- id is a must -->
+		        	<!-- <id property="id" column="m_id"/> -->
+			   		<result property="id" column="m_id"/>
+			   		<result property="username" column="m_username"/>
+			   		<result property="parola" column="m_parola"/>
+			   		<result property="email" column="m_email"/>
+			   		<result property="nume" column="m_nume"/>
+			   		<result property="prenume" column="m_prenume"/>
+			   		<result property="telefon" column="m_telefon"/>
+			  	<collection property="notificare" column="id" javaType="ArrayList" ofType="ro.intership.livehelp.model.Notificare">
+				  	<!-- <id property="id" column="s_id"/> -->
+			   		<result property="id" column="s_id"/>
+			   		<result property="id_tichet" column="s_id_tichet"/>
+			   		<result property="id_utilizator" column="s_id_utilizator"/>
+			   		<result property="stadiu" column="s_stadiu"/>
+			   		<result property="text" column="s_text"/>
+ 			  	</collection>
+			</resultMap>
+
+</mapper>
+

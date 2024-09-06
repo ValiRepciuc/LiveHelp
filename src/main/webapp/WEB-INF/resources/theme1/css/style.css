@@ -1,0 +1,125 @@
+body {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 350px;
+}
+
+.login-form {
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  text-align: center;
+}
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+.login-form .form-control {
+  border-radius: 8px;
+  box-shadow: none;
+}
+.login-form .form-control:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #ced4da;
+}
+.login-btn {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: all 0.4s;
+  width: 100%;
+}
+.login-btn:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+.forgot-password {
+  text-align: left;
+  margin-bottom: 10px;
+}
+.btn-login {
+  margin-top: 10px;
+}
+.login-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-forgot:hover {
+  text-decoration: none;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #1167bd;
+}
+.forgot-password .btn-forgot {
+  padding: 0;
+  text-align: left;
+  color: #007bff;
+  text-decoration: none;
+  width: 100%;
+}
+.forgot-password .btn-forgot:hover {
+  text-decoration: none;
+}
+@media (min-width: 576px) {
+  .forgot-password .btn-forgot {
+    padding-right: 0;
+    text-align: left;
+    color: #007bff;
+    text-decoration: none;
+    width: 100%;
+  }
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 150px;
+  max-width: 90%;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon {
+  margin-bottom: 15px;
+}
+
+.message {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.icon i {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+

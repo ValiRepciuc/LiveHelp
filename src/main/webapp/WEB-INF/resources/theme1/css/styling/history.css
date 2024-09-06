@@ -1,0 +1,43 @@
+.bg-sent {
+  background: rgb(21, 108, 136);
+  background: linear-gradient(
+    0deg,
+    rgba(21, 108, 136, 1) 4%,
+    rgba(14, 106, 255, 1) 100%
+  );
+  border: none;
+}
+.bg-working {
+  background: rgb(251, 174, 60);
+  background: linear-gradient(
+    0deg,
+    rgba(251, 174, 60, 1) 4%,
+    rgba(251, 174, 60, 1) 47%,
+    rgba(249, 198, 121, 1) 100%
+  );
+  border: none;
+}
+.bg-checked {
+  background: rgb(14, 79, 17);
+  background: linear-gradient(
+    0deg,
+    rgba(14, 79, 17, 1) 4%,
+    rgba(46, 231, 115, 1) 100%
+  );
+  border: none;
+}
+.bg-self-closed {
+  background: rgb(102, 15, 15);
+  background: linear-gradient(
+    0deg,
+    rgba(102, 15, 15, 1) 4%,
+    rgba(255, 78, 78, 1) 100%
+  );
+  border: none;
+}
+
+@media (max-width: 767px) {
+  .hide {
+    display: none;
+  }
+}

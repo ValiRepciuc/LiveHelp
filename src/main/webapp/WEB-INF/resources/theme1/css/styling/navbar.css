@@ -1,0 +1,35 @@
+.color-custom {
+  color: #fbae3c;
+}
+.btn-create {
+  border: 1px solid #fbae3c;
+  border-radius: 8px;
+  color: #fbae3c;
+  background-color: white;
+  font-size: 12px;
+}
+.btn-create:hover {
+  border: 1px solid #c88b30;
+  color: #c88b30;
+}
+.btn-create:active {
+  border: 1px solid #c88b30;
+  color: #c88b30;
+  opacity: 0.8;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  transform: translateY(0);
+}
+@media (max-width: 767px) {
+  .navbar-nav .dropdown .dropdown-menu {
+    position: fixed;
+    top: 45px;
+    right: 10px;
+    width: 300px;
+    z-index: 1060;
+  }
+}
