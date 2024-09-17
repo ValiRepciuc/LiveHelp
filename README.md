@@ -5,8 +5,6 @@
 - **Repciuc Valentin** - Student, Faculty of Mathematics and Computer Science, University of Ovidius
 - **Petrică Laurențiu** - Student, Faculty of Mathematics and Computer Science, University of Ovidius
 
-Mentor: **TOADER Ștefan-Marian**
-
 ---
 
 ## Table of Contents
